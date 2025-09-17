@@ -1,17 +1,22 @@
 
 
 const input = document.getElementById('input');
+var timepernote = 0;
+var length = 0;
+
 var amplitude = 40;
 var interval = null;
 var reset = false;
 const audioCtx = new AudioContext();
 const gainNode = audioCtx.createGain();
 
+// oscillator definitions
 const oscillator= audioCtx.createOscillator();
 oscillator.connect(gainNode);
 gainNode.connect(audioCtx.destination);
 oscillator.type = "sine";
 
+// canvas variables
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var width = ctx.canvas.width;
@@ -36,13 +41,15 @@ function frequency(pitch) {
     freq = pitch / 10000;
 gainNode.gain.setValueAtTime(0.8,audioCtx.currentTime);
 oscillator.frequency.setValueAtTime(pitch,audioCtx.currentTime);
-gainNode.gain.setValueAtTime(0,audioCtx.currentTime + 0.9);
+gainNode.gain.setValueAtTime(0,audioCtx.currentTime + (timepernote/1000)-0.1);
 
 }
 
 function handle() {
     reset = true;
     var usernotes = String(input.value).toUpperCase();
+    length = usernotes.length;
+    timepernote = (6000 / length);
     var noteslist = [];
 
         for (i = 0; i < usernotes.length; i++) {
@@ -57,8 +64,7 @@ function handle() {
         } else {
             clearInterval(repeat)
         }
-        
-    }, 1000)
+    }, timepernote);
 }
 
 var counter = 0;
@@ -79,12 +85,16 @@ function drawWave(freq) {
    
 function line() {
     y = height / 2 + (amplitude * Math.sin(x * 2 *
-         Math.PI * freq));
+         Math.PI * freq * (0.5 * length)));
     ctx.lineTo(x, y);
     ctx.stroke();
     x = x + 1;
     //increase counter by 1 to show how long interval has been run
     counter++;
+
+    if(counter > (timepernote/20)) {
+        clearInterval(interval);
+    }
 }
 
 
