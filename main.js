@@ -36,14 +36,19 @@ notenames.set("G",392.0);
 notenames.set("A",440.0);
 notenames.set("B",493.9);
 
+const color_picker = document.getElementById('color');
+const vol_slider = document.getElementById('vol-slider');
+const thickness_slider = document.getElementById('thickness-slider');
+
 
 function frequency(pitch) {
     freq = pitch / 10000;
-gainNode.gain.setValueAtTime(0.8,audioCtx.currentTime);
+gainNode.gain.setValueAtTime((vol_slider.value/100)*40,audioCtx.currentTime);
+setting = setInterval(() => {gainNode.gain.value = (vol_slider.value/100)*40}, 1);
 oscillator.frequency.setValueAtTime(pitch,audioCtx.currentTime);
-gainNode.gain.setValueAtTime(0,audioCtx.currentTime + (timepernote/1000)-0.1);
-
+setTimeout(() => { clearInterval(setting); gainNode.gain.value = 0; }, ((timepernote)-10));
 }
+
 
 function handle() {
     reset = true;
@@ -84,8 +89,10 @@ function drawWave(freq) {
 
    
 function line() {
-    y = height / 2 + (amplitude * Math.sin(x * 2 *
-         Math.PI * freq * (0.5 * length)));
+    y = height / 2 + vol_slider.value * Math.sin(x * ((2 *
+         Math.PI * freq * thickness_slider.value * (0.5 * length))));
+    ctx.strokeStyle = color_picker.value;
+    ctx.thicknessStyle = thickness_slider.value;
     ctx.lineTo(x, y);
     ctx.stroke();
     x = x + 1;
