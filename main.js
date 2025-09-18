@@ -1,6 +1,17 @@
 
 
 const input = document.getElementById('input');
+//color declarations
+const choicecolor1 = document.getElementById('red');
+const choicecolor2 = document.getElementById('orange');
+const choicecolor3 = document.getElementById('yellow');
+const choicecolor4 = document.getElementById('green');
+const choicecolor5 = document.getElementById('blue');
+const choicecolor6 = document.getElementById('purple');
+
+
+const recording_toggle = document.getElementById('record');
+
 var timepernote = 0;
 var length = 0;
 
@@ -27,6 +38,7 @@ gainNode.gain.value = 0;
 audioCtx.resume();
 gainNode.gain.value = 0;
 
+
 notenames = new Map();
 notenames.set("C",261.6);
 notenames.set("D",293.7);
@@ -39,6 +51,35 @@ notenames.set("B",493.9);
 const color_picker = document.getElementById('color');
 const vol_slider = document.getElementById('vol-slider');
 const thickness_slider = document.getElementById('thickness-slider');
+
+const root = document.documentElement;
+
+[colorchoice1, colorchoice2, colorchoice3, colorchoice4, colorchoice5, colorchoice6].forEach(el => el.addEventListener('input', updateColors));
+colorTheme();
+
+function colorTheme() {
+    document.documentElement.style.setProperty('--red', choicecolor1.value);
+    document.documentElement.style.setProperty('--orange', choicecolor2.value);
+    document.documentElement.style.setProperty('--yellow', choicecolor3.value);
+    document.documentElement.style.setProperty('--green', choicecolor4.value);
+    document.documentElement.style.setProperty('--blue', choicecolor5.value);
+    document.documentElement.style.setProperty('--purple', choicecolor6.value);
+    
+
+
+
+
+    const colorgradient = ctx.createLinearGradient(0, 0, width, height);
+    colorgradient.addColorStop(0, choicecolor1.value);
+    colorgradient.addColorStop(0.2, choicecolor2.value);
+    colorgradient.addColorStop(0.4, choicecolor3.value);
+    colorgradient.addColorStop(0.6, choicecolor4.value);
+    colorgradient.addColorStop(0.8, choicecolor5.value);
+    colorgradient.addColorStop(1, choicecolor6.value);
+
+    return colorgradient;
+}
+
 
 
 function frequency(pitch) {
@@ -102,6 +143,53 @@ function line() {
     if(counter > (timepernote/20)) {
         clearInterval(interval);
     }
+}
+
+//js media recording api
+var blob, recorder = null;
+var chunks = [];
+
+function startRecording() {
+    const canvasStream = canvas.captureStream(20);
+    const audioDestination = audioCtx.createMediaStreamDestination(); 
+    gainNode.connect(audioDestination);
+
+    const combinedStream = new MediaStream();
+    canvasStream.getVideoTracks().forEach(track => combinedStream.addTrack(track));
+    audioDestination.stream.getAudioTracks().forEach(track => combinedStream.addTrack(track));
+
+    recorder = new MediaRecorder(combinedStream, { mimeType: 'video/webm' });
+
+    recorder.ondataavailable = e => {
+ if (e.data.size > 0) {
+   chunks.push(e.data);
+   recorder.start();
+ }
+};
+
+var is_recording = false;
+
+function toggle() {
+    is_recording = !is_recording;
+    if(is_recording) {
+        recording_toggle.innerHTML = "Stop Recording";
+        startRecording();
+    } else {
+        recording_toggle.innerHTML = "Start Recording";
+        recorder.stop();
+    }
+}
+
+
+recorder.onstop = () => {
+   const blob = new Blob(chunks, { type: 'video/webm' });
+   const url = URL.createObjectURL(blob);
+   const a = document.createElement('a');
+   a.href = url;
+   a.download = 'recording.webm';
+   a.click();
+   URL.revokeObjectURL(url);
+};
 }
 
 
