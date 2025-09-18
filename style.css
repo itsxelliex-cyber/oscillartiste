@@ -2,19 +2,69 @@ body {
     background-image: url('backgroundoscill.jpg');
     background-size: cover;
 }
+font {
+    .medievalsharp-regular {
+  font-family: "MedievalSharp", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+}
+
+#icon {
+    transform: translate(350px, -100px);
+}
 h1 { 
     text-align: center;
-
+    font-family: "MedievalSharp", cursive;
+    font-size: 40px;
+    
+    
+    
 }
 
 h2 {
     text-align: center;
     font-size: 24px;
+    font-family: "MedievalSharp", cursive;
 }
+
+h3 {
+    text-align: center;
+    transform: translate(920px, -101px);
+    border: 2px black solid;
+    width: 100px;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    font-size: 16px;
+    height: 35px;
+
+}
+
+h4 {
+    text-align: center;
+    transform: translate(730px, -40px);
+    border: 2px black solid;
+   width: 100px;
+   border-radius: 10px;
+   background-color: antiquewhite;
+
+}
+
 
 h5 {
     text-align: center;
-    transform: translate(-278px, -70px);
+    transform: translate(-278px, -240px);
+    
+}
+
+h6 {
+    text-align: center;
+    transform: translate(1060px, -170px);
+    border: 2px black solid;
+    width: 100px;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    font-size: 16px;
 }
 
 #canvas {
@@ -23,7 +73,7 @@ h5 {
     width: 900px;
     margin-bottom: 2em;
     transform: translate(250px, 40px);
-    background-color: white;
+    background-color: antiquewhite;
     text-align: center;
 }
 #submit {
@@ -33,7 +83,7 @@ h5 {
     font-size: 20px;
     border-radius: 10px;
     border: 2px solid black;
-    background-color: seashell;
+    background-color: antiquewhite;
 }
 
 #record {
@@ -41,7 +91,7 @@ h5 {
     height: 40px;
     width: 100px;
     font-size: 20px;
-    background-color: seashell;
+    background-color: antiquewhite;
     border-radius: 10px;
     border: 2px solid black;
 }
@@ -58,6 +108,6 @@ h5 {
     transform: translate(373px, 30px);
 }
 #color {
-    
+    transform: translate(730px, 65px);
 }
 

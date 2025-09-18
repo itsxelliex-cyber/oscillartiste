@@ -1,14 +1,6 @@
 
 
 const input = document.getElementById('input');
-//color declarations
-const choicecolor1 = document.getElementById('red');
-const choicecolor2 = document.getElementById('orange');
-const choicecolor3 = document.getElementById('yellow');
-const choicecolor4 = document.getElementById('green');
-const choicecolor5 = document.getElementById('blue');
-const choicecolor6 = document.getElementById('purple');
-
 
 const recording_toggle = document.getElementById('record');
 
@@ -53,33 +45,6 @@ const vol_slider = document.getElementById('vol-slider');
 const thickness_slider = document.getElementById('thickness-slider');
 
 const root = document.documentElement;
-
-[colorchoice1, colorchoice2, colorchoice3, colorchoice4, colorchoice5, colorchoice6].forEach(el => el.addEventListener('input', updateColors));
-colorTheme();
-
-function colorTheme() {
-    document.documentElement.style.setProperty('--red', choicecolor1.value);
-    document.documentElement.style.setProperty('--orange', choicecolor2.value);
-    document.documentElement.style.setProperty('--yellow', choicecolor3.value);
-    document.documentElement.style.setProperty('--green', choicecolor4.value);
-    document.documentElement.style.setProperty('--blue', choicecolor5.value);
-    document.documentElement.style.setProperty('--purple', choicecolor6.value);
-    
-
-
-
-
-    const colorgradient = ctx.createLinearGradient(0, 0, width, height);
-    colorgradient.addColorStop(0, choicecolor1.value);
-    colorgradient.addColorStop(0.2, choicecolor2.value);
-    colorgradient.addColorStop(0.4, choicecolor3.value);
-    colorgradient.addColorStop(0.6, choicecolor4.value);
-    colorgradient.addColorStop(0.8, choicecolor5.value);
-    colorgradient.addColorStop(1, choicecolor6.value);
-
-    return colorgradient;
-}
-
 
 
 function frequency(pitch) {
