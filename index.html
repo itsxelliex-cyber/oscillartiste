@@ -6,6 +6,8 @@
         <link href="style.css" rel="stylesheet"/>
     </head>
     <body>
+      <h1> oscillartiste</h1>
+      <h2> you're an inventor in the 1600's.. create your own masterpiece with notes on the c-major scale</h2>
       <div id="container"> 
         <canvas id="canvas"> 
           
@@ -13,8 +15,8 @@
       </canvas>
      </div>
       <input type="text" id="input">
-      <button id="submit" class = button onclick="handle()"> Submit</button>
-      <button id="record" class = button onclick="toggle()"> Start Recording </button>
+      <button id="submit" onclick="handle()"> Submit</button>
+      <button id="record" onclick="toggle()"> Record </button>
       
 
       <input type="color" id="color" value="#ff0000">"
@@ -32,6 +34,7 @@
         <input type="color" id="purple" value="#a020f0">
 
       </div>
+      <h5> enter notes on the c-major scale </h5>
       <script src="main.js"> </script>
     </body>
 </html>

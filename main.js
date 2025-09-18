@@ -164,24 +164,9 @@ function startRecording() {
  if (e.data.size > 0) {
    chunks.push(e.data);
    recorder.start();
- }
-};
-
-var is_recording = false;
-
-function toggle() {
-    is_recording = !is_recording;
-    if(is_recording) {
-        recording_toggle.innerHTML = "Stop Recording";
-        startRecording();
-    } else {
-        recording_toggle.innerHTML = "Start Recording";
-        recorder.stop();
-    }
-}
-
-
-recorder.onstop = () => {
+ };
+ 
+ recorder.onstop = () => {
    const blob = new Blob(chunks, { type: 'video/webm' });
    const url = URL.createObjectURL(blob);
    const a = document.createElement('a');
@@ -190,6 +175,23 @@ recorder.onstop = () => {
    a.click();
    URL.revokeObjectURL(url);
 };
+recorder.start();
+}
+
+var is_recording = false;
+function toggle() {
+    is_recording = !is_recording;
+    if(is_recording) {
+        recording_toggle.innerHTML = "stop recording";
+        startRecording();
+    } else {
+        recording_toggle.innerHTML = "start recording";
+        recorder.stop();
+    }
+}
+
+
+
 }
 
 
