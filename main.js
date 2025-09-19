@@ -49,7 +49,7 @@ const thickness_slider = document.getElementById('thickness-slider');
 
 function frequency(pitch) {
     freq = pitch / 10000;
-gainNode.gain.setValueAtTime(vol_slider.value, audioCtx.currentTime);
+gainNode.gain.setValueAtTime(100, audioCtx.currentTime);
 setting = setInterval(() => {gainNode.gain.value = vol_slider.value}, 1)
 oscillator.frequency.setValueAtTime(pitch,audioCtx.currentTime);
 setTimeout(() => { 
@@ -90,12 +90,8 @@ function line() {
     }
 }
 
-async function handle() {
+ function handle() {
     reset = true;
-    // Ensure audio context is resumed on user gesture
-    if (audioCtx.state === 'suspended') {
-        await audioCtx.resume();
-    }
     var usernotes = String(input.value).toUpperCase();
     length = usernotes.length;
     timepernote = (6000 / length);
