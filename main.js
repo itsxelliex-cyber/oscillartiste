@@ -1,5 +1,4 @@
 
-
 const input = document.getElementById('input');
 
 const recording_toggle = document.getElementById('record');
