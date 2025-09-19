@@ -48,7 +48,7 @@ const thickness_slider = document.getElementById('thickness-slider');
 
 function frequency(pitch) {
     freq = pitch / 10000;
-gainNode.gain.setValueAtTime(vol_slider.value, audioCtx.currentTime);
+gainNode.gain.setValueAtTime(vol_slider.value/100, audioCtx.currentTime);
 setting = setInterval(() => {gainNode.gain.value = vol_slider.value}, 1)
 oscillator.frequency.setValueAtTime(pitch,audioCtx.currentTime);
 setTimeout(() => { 
@@ -116,6 +116,7 @@ function line() {
 var blob, recorder = null;
 var chunks = [];
 function startRecording() {
+    chunks = [];
     const canvasStream = canvas.captureStream(20);
     const audioDestination = audioCtx.createMediaStreamDestination(); 
     gainNode.connect(audioDestination);
