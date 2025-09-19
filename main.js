@@ -90,8 +90,12 @@ function line() {
     }
 }
 
-function handle() {
+async function handle() {
     reset = true;
+    // Ensure audio context is resumed on user gesture
+    if (audioCtx.state === 'suspended') {
+        await audioCtx.resume();
+    }
     var usernotes = String(input.value).toUpperCase();
     length = usernotes.length;
     timepernote = (6000 / length);
