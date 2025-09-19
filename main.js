@@ -25,6 +25,38 @@ var ctx = canvas.getContext("2d");
 var width = ctx.canvas.width;
 var height = ctx.canvas.height;
 var counter = 0;
+
+
+oscillator.start();
+gainNode.gain.value = 0;
+audioCtx.resume();
+gainNode.gain.value = 0;
+
+
+notenames = new Map();
+notenames.set("C",261.6);
+notenames.set("D",293.7);
+notenames.set("E",329.6);
+notenames.set("F",349.2);
+notenames.set("G",392.0);
+notenames.set("A",440.0);
+notenames.set("B",493.9);
+
+const color_picker = document.getElementById('color');
+const vol_slider = document.getElementById('vol-slider');
+const thickness_slider = document.getElementById('thickness-slider');
+
+const root = document.documentElement;
+
+
+function frequency(pitch) {
+    freq = pitch / 10000;
+gainNode.gain.setValueAtTime(vol_slider.value,audioCtx.currentTime);
+setting = setInterval(() => {gainNode.gain.value =vol_slider.value}, + 1)
+oscillator.frequency.setValueAtTime(pitch,audioCtx.currentTime);
+setTimeout(() => { clearInterval(setting); gainNode.gain.value = 0; }, ((timepernote)-10));
+}
+
 function drawWave(freq) {
     clearInterval(interval);
     counter = 0;
@@ -56,37 +88,6 @@ function line() {
         clearInterval(interval);
     }
 }
-
-oscillator.start();
-gainNode.gain.value = 0;
-audioCtx.resume();
-gainNode.gain.value = 0;
-
-
-notenames = new Map();
-notenames.set("C",261.6);
-notenames.set("D",293.7);
-notenames.set("E",329.6);
-notenames.set("F",349.2);
-notenames.set("G",392.0);
-notenames.set("A",440.0);
-notenames.set("B",493.9);
-
-const color_picker = document.getElementById('color');
-const vol_slider = document.getElementById('vol-slider');
-const thickness_slider = document.getElementById('thickness-slider');
-
-const root = document.documentElement;
-
-
-function frequency(pitch) {
-    freq = pitch / 10000;
-gainNode.gain.setValueAtTime((vol_slider.value/100)*40,audioCtx.currentTime);
-setting = setInterval(() => {gainNode.gain.value =vol_slider.value}, + 1)
-oscillator.frequency.setValueAtTime(pitch,audioCtx.currentTime);
-setTimeout(() => { clearInterval(setting); gainNode.gain.value = 0; }, ((timepernote)-10));
-}
-
 
 function handle() {
     reset = true;
