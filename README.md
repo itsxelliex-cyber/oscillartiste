@@ -7,4 +7,4 @@ HOW i made this website: for the first time, i created a website mainly using ja
 
 something i struggled with: definitely using javascript and trying to understand how all the apis and methods and functions came together to be able to perform a task such as recording on a computer. definitely struggled with the setup of my recording api code, which took so long, but i'm finally done! its not perfect ui wise, but i'll edit later for aesthetics and all that. the main thing is that it's functional! loll
 
-
+[![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
