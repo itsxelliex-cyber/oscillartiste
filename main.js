@@ -46,12 +46,10 @@ const color_picker = document.getElementById('color');
 const vol_slider = document.getElementById('vol-slider');
 const thickness_slider = document.getElementById('thickness-slider');
 
-const root = document.documentElement;
-
 
 function frequency(pitch) {
     freq = pitch / 10000;
-gainNode.gain.setValueAtTime(vol_slider.value,audioCtx.currentTime);
+gainNode.gain.setValueAtTime(vol_slider.value, audioCtx.currentTime);
 setting = setInterval(() => {gainNode.gain.value = vol_slider.value}, 1)
 oscillator.frequency.setValueAtTime(pitch,audioCtx.currentTime);
 setTimeout(() => { 
