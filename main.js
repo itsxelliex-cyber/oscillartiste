@@ -48,7 +48,7 @@ const thickness_slider = document.getElementById('thickness-slider');
 
 function frequency(pitch) {
     freq = pitch / 10000;
-gainNode.gain.setValueAtTime(100, audioCtx.currentTime);
+gainNode.gain.setValueAtTime(vol_slider.value, audioCtx.currentTime);
 setting = setInterval(() => {gainNode.gain.value = vol_slider.value}, 1)
 oscillator.frequency.setValueAtTime(pitch,audioCtx.currentTime);
 setTimeout(() => { 
@@ -57,7 +57,7 @@ setTimeout(() => {
     ((timepernote)-10));
 }
 
-function drawWave(freq) {
+function drawWave() {
     clearInterval(interval);
     counter = 0;
     if (reset) {
