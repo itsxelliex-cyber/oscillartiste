@@ -2,7 +2,8 @@
 
 const input = document.getElementById('input');
 
-const recording_toggle = document.getElementById('record');
+const recording_toggle = 
+document.getElementById('record');
 
 var timepernote = 0;
 var length = 0;
@@ -112,26 +113,27 @@ function line() {
 
 //js media recording api
 var blob, recorder = null;
-var chunks = [];
-
+var chunks =[];
 function startRecording() {
+   
     const canvasStream = canvas.captureStream(20);
     const audioDestination = audioCtx.createMediaStreamDestination(); 
     gainNode.connect(audioDestination);
 
     const combinedStream = new MediaStream();
+    chunks = [];
+
     canvasStream.getVideoTracks().forEach(track => combinedStream.addTrack(track));
+
     audioDestination.stream.getAudioTracks().forEach(track => combinedStream.addTrack(track));
 
     recorder = new MediaRecorder(combinedStream, { mimeType: 'video/webm' });
-
     recorder.ondataavailable = e => {
  if (e.data.size > 0) {
    chunks.push(e.data);
-   recorder.start();
  };
- 
- recorder.onstop = () => {
+
+recorder.onstop = () => {
    const blob = new Blob(chunks, { type: 'video/webm' });
    const url = URL.createObjectURL(blob);
    const a = document.createElement('a');
@@ -141,22 +143,23 @@ function startRecording() {
    URL.revokeObjectURL(url);
 };
 recorder.start();
-}
+
+    }
 
 var is_recording = false;
 function toggle() {
     is_recording = !is_recording;
     if(is_recording) {
-        recording_toggle.innerHTML = "stop recording";
+        recording_toggle.innerHTML = "Stop recording";
         startRecording();
     } else {
-        recording_toggle.innerHTML = "start recording";
+        recording_toggle.innerHTML = "Start recording";
         recorder.stop();
     }
 }
 
 
 
-}
+    }
 
 
