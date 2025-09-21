@@ -11,7 +11,7 @@ font {
 }
 
 #icone {
-    transform: translate(470px, -170px);
+    transform: translate(200px, -170px);
     border: 8px rgb(142, 109, 52) solid;
     width: 100px;
     height:100px;
@@ -19,7 +19,7 @@ font {
 }
 
 #icons {
-    transform: translate(850px, -285px);
+    transform: translate(1100px, -285px);
     border: 8px rgb(142, 109, 52) solid;
     width: 100px;
     height:100px;
